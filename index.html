@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pricelist Aksessories - Infokom</title>
+<style>
+body{font-family:Arial;margin:0;background:#f4f4f4}header{background:#005baa;color:#fff;padding:20px;text-align:center}
+.container{max-width:1100px;margin:auto;padding:15px}input{width:100%;padding:10px}
+table{width:100%;border-collapse:collapse;background:#fff}th,td{border:1px solid #ddd;padding:8px}th{background:#005baa;color:#fff}
+a.wa{position:fixed;right:20px;bottom:20px;background:#25D366;color:#fff;padding:12px 16px;text-decoration:none;border-radius:24px}
+</style></head><body>
+<header><h1>Pricelist Aksessories</h1><h2>Infokom</h2><p>Sales: Dian Wicaksono</p><p>WA: 085226356334</p></header>
+<div class="container">
+<input id="q" placeholder="Cari barang..." oninput="filterRows()">
+<table id="tbl"><thead><tr><th>No</th><th>Nama Barang</th><th>Type</th><th>Keterangan</th><th>Harga</th></tr></thead><tbody></tbody></table>
+</div>
+<a class="wa" href="https://wa.me/6285226356334" target="_blank">WhatsApp</a>
+<script>
+const csvUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vRgXpStc2KxTmNB3HjLE_M-ZNfbv5QqEnflZtG-A5frwwI_-HSnRWTAFeWNg0lZ78hXh0YGHKOXK8it/pub?gid=0&single=true&output=csv";
+fetch(csvUrl).then(r=>r.text()).then(t=>{
+ const rows=t.trim().split(/\r?\n/).map(r=>r.split(","));
+ const tb=document.querySelector("#tbl tbody");
+ rows.slice(1).forEach(c=>{
+  let tr=document.createElement("tr");
+  c.forEach((v,i)=>{
+    let td=document.createElement("td");
+    td.textContent=(i==4 && !isNaN(v))?new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(Number(v)):v;
+    tr.appendChild(td);
+  });
+  tb.appendChild(tr);
+ });
+});
+function filterRows(){
+ let q=document.getElementById("q").value.toLowerCase();
+ document.querySelectorAll("#tbl tbody tr").forEach(r=>{
+  r.style.display=r.innerText.toLowerCase().includes(q)?"":"none";
+ });
+}
+</script></body></html>
