@@ -30,7 +30,7 @@ margin-left:10px;
 <table id="tbl"><thead><tr><th>NAMA BARANG</th><th>MERK</th><th>TYPE & SPESIFIKASI</th><th>HARGA</th></tr></thead><tbody></tbody></table>
 </div>
 <script>
-const csvUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ25uhwbGH5xG-oqtY5b6zTwCFMCHdE76nWoNEL6FUDa9bcQJSl-e7V5EQNbsWIKmuh4pUfLgv8GYr_/pub?gid=0&single=true&output=csv"
+const csvUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vRgXpStc2KxTmNB3HjLE_M-ZNfbv5QqEnflZtG-A5frwwI_-HSnRWTAFeWNg0lZ78hXh0YGHKOXK8it/pub?gid=0&single=true&output=csv"
 ;fetch(csvUrl).then(r=>r.text()).then(t=>{
  const rows=t.trim().split(/\r?\n/).map(r=>r.split(","));
  const tb=document.querySelector("#tbl tbody");
